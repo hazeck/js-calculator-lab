@@ -1,22 +1,49 @@
-const display = document.getElementById("display");
-
-function appendToDisplay(input) {
-    display.value += input;
+function addition(a, b) {
+    return a + b;
+}
+function subtraction(a, b) {
+    return a - b;
+}
+function multiplication(a, b) {
+    return a * b;
+}
+function division(a, b) {
+    if (b === 0) {
+        return "Error: Division by zero";
+    }
+    return a / b;
 }
 
-function clearDisplay() {
-    display.value = "";
-}
 
-function calculate() {
-    try{
-        display.value = eval(display.value);
+let calculationHistory = [];
+
+function calculator(a, b, operator) {
+    let result;
+    switch (operator) {
+        case "+":
+            result = addition(a, b);
+            break;
+        case "-":
+            result = subtraction(a, b);
+            break;
+        case "*":
+            result = multiplication(a, b);
+            break;
+        case "/":
+            result = division(a, b);
+            break;
+        default:
+            result = "Error: Invalid operator";
     }
-    catch (error) {
-        display.value = "Error";
-    }
-    if (display.value === "Infinity") {
-        display.value = "Error"; 
-    }
+
+    // Store the calculation as an object
+    calculationHistory.push({
+        operand1: a,
+        operand2: b,
+        operator: operator,
+        result: result
+    });
+
+    return result;
 }
 
